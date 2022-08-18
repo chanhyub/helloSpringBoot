@@ -1,7 +1,6 @@
 package com.example.hello;
 
 import com.example.hello.domain.food.TbFood;
-import com.example.hello.domain.search.TbSearch;
 import com.example.hello.service.search.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -37,11 +36,11 @@ public class IndexController {
         return "foodrandom";
     }
 
-    @GetMapping("/searchlist")
+    @GetMapping("/foodlist")
     public String searchList(Model model){
-        List<TbSearch> list = searchService.findAll();
-        model.addAttribute("slist", list);
-        return "searchlist";
+        List<TbFood> list = searchService.findAll();
+        model.addAttribute("flist", list);
+        return "foodlist";
     }
 
 

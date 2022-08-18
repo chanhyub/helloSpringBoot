@@ -28,8 +28,8 @@ public class SearchService {
         return NaverApiSearch.newsApi(searchSaveRequestDto.getSearch());
     }
 
-    public List<TbSearch> findAll(){
-        return tbSearchRepository.findAll();
+    public List<TbFood> findAll(){
+        return tbFoodRepository.findAll();
     }
 
     public List<TbFood> findFoodRand(){

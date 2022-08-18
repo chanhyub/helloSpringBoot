@@ -1,17 +1,19 @@
 {{>layout/header}}
-  <h2>검색 리스트</h2>
+  <h2>음식 리스트</h2>
 <table class="table table-dark table-hover">
   <thead>
   <tr>
-    <th>검색어</th>
+    <th>음식이름</th>
+    <th>이미지링크</th>
   </tr>
   </thead>
   <tbody>
-  {{#slist}}
+  {{#flist}}
   <tr>
-    <td>{{search}}</td>
+    <td>{{name}}</td>
+    <td>{{img}}</td>
   </tr>
-  {{/slist}}
+  {{/flist}}
   </tbody>
 </table>
 </div>
