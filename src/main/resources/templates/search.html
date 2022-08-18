@@ -1,0 +1,47 @@
+{{>layout/header}}
+  <h2>뉴스 검색</h2>
+  <form class="form-inline">
+    <input type="text" class="form-control" id="search" placeholder="검색어 입력..." name="search">
+  </form>
+  <button type="button" class="btn btn-primary" id="btn-save">검색</button>
+  <div id="result"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  var main = {
+    init : function () {
+      var _this = this;
+      $('#btn-save').on('click', function () {
+        _this.save();
+      });
+    },
+    save : function () {
+      var data = {
+        search: $('#search').val()
+      };
+      $.ajax({
+        type: 'POST',
+        url: '/api/v1/news',
+        dataType: 'json',
+        contentType: 'application/json; charset-utf-8',
+        data: JSON.stringify(data)
+      }).done(function (data) {
+        $("#result").html("");
+        // alert(data + '등록되었습니다.');
+        $.each(data.items, function(i, field){
+          var html = "<a href='" + field.link +"'>" + field.title + "</a><br>";
+          $("#result").append(html);
+        });
+        // window.location.href = '/search';
+      }).fail(function (error) {
+        alert(JSON.stringify(error));
+      });
+    },
+  };
+
+  main.init();
+
+</script>
+</body>
+</html>
