@@ -4,6 +4,7 @@ import com.example.hello.domain.search.TbSearch;
 import com.example.hello.domain.search.TbSearchRepository;
 import com.example.hello.service.search.SearchService;
 import com.example.hello.utils.NaverApiMovie;
+import com.example.hello.web.dto.FoodRequestDto;
 import com.example.hello.web.dto.SearchSaveRequestDto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,6 +34,11 @@ public class SearchController {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         String json = gson.toJson(movieList);
         return json;
+    }
+
+    @PostMapping("/api/v1/foodsave")
+    public Long save(@RequestBody FoodRequestDto foodRequestDto){
+        return searchService.foodSave(foodRequestDto);
     }
 
 

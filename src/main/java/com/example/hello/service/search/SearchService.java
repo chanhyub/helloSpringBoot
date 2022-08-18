@@ -6,6 +6,7 @@ import com.example.hello.domain.search.TbSearch;
 import com.example.hello.domain.search.TbSearchRepository;
 import com.example.hello.utils.NaverApiMovie;
 import com.example.hello.utils.NaverApiSearch;
+import com.example.hello.web.dto.FoodRequestDto;
 import com.example.hello.web.dto.SearchSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,11 @@ public class SearchService {
     @Transactional
     public Long save(SearchSaveRequestDto searchSaveRequestDto){
         return tbSearchRepository.save(searchSaveRequestDto.toEntity()).getId();
+    }
+
+    @Transactional
+    public Long foodSave(FoodRequestDto foodRequestDto){
+        return tbFoodRepository.save(foodRequestDto.toEntity()).getId();
     }
 
     public String news(SearchSaveRequestDto searchSaveRequestDto){

@@ -1,5 +1,6 @@
 {{>layout/header}}
   <h2>음식 리스트</h2>
+<button type="button" class="btn btn-danger" id="myBtn">메뉴 추가</button>
 <table class="table table-dark table-hover">
   <thead>
   <tr>
@@ -16,6 +17,64 @@
   {{/flist}}
   </tbody>
 </table>
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="color: black">메뉴 입력</h4>
+      </div>
+      <div class="modal-body">
+        <div id="form">
+          <div class="form-group">
+            <label for="menuname">메뉴 :</label>
+            <input type="text" class="form-control" id="menuname" placeholder="메뉴 이름" name="menuname">
+          </div>
+          <div class="form-group">
+            <label for="imgsrc">이미지 주소 :</label>
+            <input type="text" class="form-control" id="imgsrc" placeholder="이미지 주소" name="imgsrc">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success" id="addBtn">추가</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
 </div>
+</div>
+<script>
+  var main = {
+    init : function () {
+      var _this = this;
+      $('#addBtn').on('click', function () {
+        _this.save();
+      });
+      $("#myBtn").click(function(){
+        $("#myModal").modal();
+      });
+    },
+    save : function () {
+      var data = {
+        name: $('#menuname').val(),
+        img: $('#imgsrc').val()
+      };
+      $.ajax({
+        type: 'POST',
+        url: '/api/v1/foodsave',
+        dataType: 'json',
+        contentType: 'application/json; charset-utf-8',
+        data: JSON.stringify(data)
+      }).done(function () {
+        alert('음식이 등록되었습니다.');
+        //window.location.href = '/'; // (1)
+      }).fail(function (error) {
+        alert(JSON.stringify(error));
+      });
+    },
+  };
+
+  main.init();
+</script>
 </body>
 </html>
